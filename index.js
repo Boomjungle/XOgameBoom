@@ -27,7 +27,7 @@ let flag = true;
 
 for(let i = 0; i < cell.length; i++) {
     cell[i].addEventListener('click', () => {
-        if(flag === ture) {
+        if(flag === true) {
             addCellsPlayer1(i);
         } else {
             addCellsPlayer2(i);
@@ -36,7 +36,7 @@ for(let i = 0; i < cell.length; i++) {
     })
 }
 
-function addCellsPlayer1() {
+function addCellsPlayer1(i) {
     cell[i].innerHTML = "X";
     player1.push(i)
     flag = false;
@@ -51,9 +51,15 @@ function checkWinner() {
     winCombinations.find((item) => {
         if(item.filter((i) => player1.includes(i)).length === 3) {
             alert("Player 1 Won");
+            score.player1++;
+            drawScore();
+            clearField();
             return item;
         } else if(item.filter((i) => player2.includes(i)).length === 3) {
             alert("Player 2 Won");
+            score.player2++;
+            drawScore();
+            clearField();
         }
         return
     })
@@ -69,6 +75,12 @@ function clearField() {
     for(let i = 0; i < cell.length; i++) {
 
     }
+    restartBtn.addEventListener('click', () => {
+        location.reload();
+        //clearField();
+    })
+
+    
     player1 = [];
     player2 = [];
     flag = true;
